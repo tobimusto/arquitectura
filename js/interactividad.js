@@ -193,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Mover el track con translate
                 track.style.transition = 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)';
-                track.style.transform = `translateX(calc(-${current * 100}% - ${current}rem))`;
+                track.style.transform = `translateX(-${current * 100}%)`;
 
                 // Actualizar dots
                 dots.forEach((d, i) => d.classList.toggle('active', i === current));

@@ -114,8 +114,29 @@ header.scrolled {
    OBRAS CAROUSEL
    ===================================================== */
 
-/* El contenedor flex ya existe en el HTML (-ml-4 flex), solo necesitamos
-   que el overflow-hidden padre funcione bien */
+/* El wrapper con overflow-hidden necesita ser el contenedor exacto */
+[aria-roledescription="carousel"] .overflow-hidden {
+    overflow: hidden !important;
+    position: relative;
+    border-radius: 1rem;
+}
+
+/* El track (-ml-4 flex) → resetear margin y hacer flex row */
+[aria-roledescription="carousel"] .-ml-4.flex {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    margin-left: 0 !important;  /* anular el -ml-4 de Tailwind que no carga */
+    will-change: transform;
+}
+
+/* Cada slide (min-w-0 flex-[0_0_100%] pl-4) → ancho exacto 100%, sin padding extra */
+[aria-roledescription="carousel"] .-ml-4.flex > div {
+    flex: 0 0 100% !important;
+    min-width: 0 !important;
+    width: 100% !important;
+    padding-left: 0 !important; /* anular el pl-4 de Tailwind */
+}
 
 /* Fix aspect-ratio de los botones del carrusel de obras (Tailwind no carga) */
 [aria-roledescription="carousel"][aria-label="Galer\u00EDa de im\u00E1genes"] button.aspect-16-9,
