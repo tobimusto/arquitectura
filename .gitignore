@@ -1,0 +1,24 @@
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Editor
+.vscode/
+*.swp
+*.swo
+*~
+
+# Python scripts de desarrollo (no necesarios en producción)
+*.py
+__pycache__/
+
+# Logs
+*.log

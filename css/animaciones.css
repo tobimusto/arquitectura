@@ -1,0 +1,186 @@
+/* animaciones.css */
+
+/* Smooth Scroll nativo (para clicks en links del menu) */
+html {
+    scroll-behavior: smooth !important;
+}
+
+/* Navbar: siempre transparente por defecto, con transición suave */
+header {
+    background-color: transparent;
+    border-bottom: 1px solid transparent;
+    transition:
+        background-color 0.4s ease,
+        border-color 0.4s ease,
+        backdrop-filter 0.4s ease;
+}
+
+/* Al scrollear, el JS agrega la clase .scrolled y el CSS anima suavemente */
+header.scrolled {
+    background-color: rgba(0, 0, 0, 0.80);
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+/* Hero Slider Classes */
+.hero-slide {
+    opacity: 0 !important;
+    z-index: 0 !important;
+    transition: opacity 0.8s ease-in-out !important;
+}
+
+.hero-slide.active {
+    opacity: 1 !important;
+    z-index: 1 !important;
+}
+
+.hero-dot {
+    background-color: transparent;
+    transition: background-color 0.3s;
+}
+
+.hero-dot.active {
+    background-color: white !important;
+}
+
+/* =====================================================
+   PROJECT CARDS - Aspect Ratio Fix (Tailwind no carga)
+   ===================================================== */
+
+/* La clase aspect-[16/10] de Tailwind no funciona aqui, así que la reemplazamos */
+.project-img-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 62.5%; /* 16:10 ratio = 10/16 * 100 = 62.5% */
+    overflow: hidden;
+}
+
+/* Scroll Snap for Gallery (Proyectos Realizados) */
+.gallery-scroll-container {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scroll-behavior: smooth;
+    padding-bottom: 1.5rem;
+    gap: 1.5rem;
+}
+
+.gallery-scroll-container::-webkit-scrollbar {
+    display: none;
+}
+
+/* Project cards sizing */
+.gallery-scroll-container > li {
+    scroll-snap-align: start;
+    flex: 0 0 85vw;
+    max-width: 420px;
+    min-width: 280px;
+}
+
+@media (min-width: 640px) {
+    .gallery-scroll-container > li {
+        flex: 0 0 45vw;
+    }
+}
+
+@media (min-width: 1024px) {
+    .gallery-scroll-container > li {
+        flex: 0 0 30vw;
+    }
+}
+
+/* Scroll Fade Up Animations - más rápidas (0.5s en vez de 0.8s) */
+.reveal-up {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.45s ease-out, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-up.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger delays reducidos para que no se sientan lentos */
+.delay-100 { transition-delay: 60ms; }
+.delay-200 { transition-delay: 120ms; }
+.delay-300 { transition-delay: 180ms; }
+.delay-400 { transition-delay: 240ms; }
+
+/* =====================================================
+   OBRAS CAROUSEL
+   ===================================================== */
+
+/* El contenedor flex ya existe en el HTML (-ml-4 flex), solo necesitamos
+   que el overflow-hidden padre funcione bien */
+
+/* Fix aspect-ratio de los botones del carrusel de obras (Tailwind no carga) */
+[aria-roledescription="carousel"][aria-label="Galer\u00EDa de im\u00E1genes"] button.aspect-16-9,
+.obras-slide-btn {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 */
+    overflow: hidden;
+    border-radius: 1rem;
+    cursor: pointer;
+}
+
+.obras-slide-btn figure {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+/* Dots del carrusel de Obras */
+.obras-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+    flex-wrap: wrap;
+}
+
+.obras-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    background: transparent;
+    cursor: pointer;
+    transition: background-color 0.25s, transform 0.2s;
+    padding: 0;
+}
+
+.obras-dot.active {
+    background-color: white;
+    transform: scale(1.2);
+}
+
+/* Flecha prev/next del carrusel de obras */
+.obras-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+    backdrop-filter: blur(4px);
+}
+.obras-arrow:hover { background: rgba(0,0,0,0.8); }
+.obras-arrow.prev { left: 0.75rem; }
+.obras-arrow.next { right: 0.75rem; }
